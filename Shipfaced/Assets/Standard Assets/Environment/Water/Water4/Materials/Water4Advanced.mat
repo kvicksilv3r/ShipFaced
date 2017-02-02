@@ -156,7 +156,7 @@ Material:
       second: 1.7931035
     - first:
         name: _FresnelScale
-      second: 0.6571428
+      second: 3.6571429
     - first:
         name: _GerstnerIntensity
       second: 1.6714286
@@ -283,7 +283,7 @@ Material:
       second: {r: 1, g: 1, b: 0, a: 0}
     - first:
         name: _ReflectionColor
-      second: {r: 0.5794164, g: 0.6849238, b: 0.76119405, a: 0.43137255}
+      second: {r: 0.9558824, g: 0.67357713, b: 0.16868511, a: 0.516}
     - first:
         name: _ReflectionTex_ST
       second: {r: 1, g: 1, b: 0, a: 0}
@@ -316,7 +316,7 @@ Material:
       second: {r: 1, g: 1, b: 0.1, a: 0.1}
     - first:
         name: _SpecularColor
-      second: {r: 0.91791046, g: 0.91791046, b: 0.91791046, a: 1}
+      second: {r: 1, g: 0.39310342, b: 0, a: 1}
     - first:
         name: _UnderwaterColor
       second: {r: 0.6950323, g: 0.89552236, b: 0.7502397, a: 1}
