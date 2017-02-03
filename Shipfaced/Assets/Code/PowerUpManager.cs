@@ -9,15 +9,21 @@ public class PowerUpManager : MonoBehaviour
     public GameObject playerManager;
     public List<Action> powerUps = new List<Action>();
     public int activatingPlayer;
+
+    public GameObject target;
+    public GameObject beer;
+    public bool beerFlying;
+
     void Awake()
     {
         playerManager = GameObject.Find("PlayerManager");
-        // powerUps.Add(PowerUpShuffleOthers);
-        // powerUps.Add(PowerUpSwitchLROthers);
-        // powerUps.Add(PowerUpSkipShuffle);
-        // powerUps.Add(PowerUpDisableOtherTrails);
-        // powerUps.Add(PowerUpSwitchControls);
+        powerUps.Add(PowerUpShuffleOthers);
+        powerUps.Add(PowerUpSwitchLROthers);
+        powerUps.Add(PowerUpSkipShuffle);
+        powerUps.Add(PowerUpDisableOtherTrails);
+        powerUps.Add(PowerUpSwitchControls);
         powerUps.Add(PowerUpStop);
+        // powerUps.Add(PowerUpBeer);
     }
 
     void PowerUpShuffleOthers()
@@ -77,7 +83,6 @@ public class PowerUpManager : MonoBehaviour
         }
         print("Disable Trails!");
     }
-
     IEnumerator DisableTrail(TrailRenderer trail)
     {
         trail.enabled = false;
@@ -145,7 +150,6 @@ public class PowerUpManager : MonoBehaviour
         }
         print("Stop!");
     }
-
     IEnumerator Stop(GameObject goToStop)
     {
         foreach (WheelCollider wheel in goToStop.GetComponentsInChildren<WheelCollider>())
@@ -160,5 +164,43 @@ public class PowerUpManager : MonoBehaviour
 
     }
 
+    void PowerUpBeer()
+    {
+        GameObject thrownBeer = Instantiate(beer, playerManager.GetComponent<PlayerManager>().players[activatingPlayer].gameObject.transform.position, playerManager.GetComponent<PlayerManager>().players[activatingPlayer].gameObject.transform.rotation);
+        thrownBeer.GetComponent<Rigidbody>().velocity = CalculateArc(target, playerManager.GetComponent<PlayerManager>().players[activatingPlayer].gameObject);
+        beerFlying = true;
+        StartCoroutine(ReCalculate(thrownBeer, target));
+        Destroy(thrownBeer, 10f);
+    }
+    public Vector3 CalculateArc(GameObject target, GameObject location)
+    {
+        Vector3 direction = target.transform.position - location.transform.position;
+        float height = direction.y;
+        direction.y = 0;
+        float distance = direction.magnitude;
+        if (location.transform.position.y >= 15)
+        {
+            beerFlying = true;
+        }
+        if (!beerFlying)
+        {
+            direction.y = distance;
+        }
+        distance += height;
+
+        float velocity = Mathf.Sqrt(distance * Physics.gravity.magnitude);
+        return direction.normalized * velocity;
+    }
+    IEnumerator ReCalculate(GameObject thrownBeer, GameObject target)
+    {
+        while (beerFlying)
+        {
+            thrownBeer.transform.LookAt(target.transform);
+            thrownBeer.GetComponent<Rigidbody>().velocity = CalculateArc(target, thrownBeer);
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
 
 }
+
+

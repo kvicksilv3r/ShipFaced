@@ -350,8 +350,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 176934317}
-  m_LocalRotation: {x: -0.66955966, y: 0, z: 0, w: 0.7427583}
-  m_LocalPosition: {x: 0, y: -65.46, z: -9.1}
+  m_LocalRotation: {x: 0.39436492, y: 0.00880076, z: 0.0037727947, w: -0.91890407}
+  m_LocalPosition: {x: -20.348705, y: -43.58283, z: -52.494225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -503,8 +503,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 191290083}
-  m_LocalRotation: {x: 0.39436492, y: 0.00880076, z: 0.0037727947, w: -0.91890407}
-  m_LocalPosition: {x: -20.348705, y: -43.58283, z: -52.494225}
+  m_LocalRotation: {x: -0.669559, y: -0.00000028827705, z: -0.00000028673242, w: 0.74275887}
+  m_LocalPosition: {x: 0, y: -65.46, z: -9.100001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3984,6 +3984,34 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 302cf869a736585409832570032199c3, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &2106178993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2106178994}
+  m_Layer: 0
+  m_Name: TestTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2106178994
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106178993}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.25, y: 0.5, z: -25.73}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2107120053
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,6 +4057,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager: {fileID: 1729031445}
   activatingPlayer: 0
+  target: {fileID: 2106178993}
+  beer: {fileID: 1896305531227662, guid: 8e17edbc43aeb6543a74833c99ffb0bd, type: 2}
+  beerFlying: 0
 --- !u!4 &2107120056
 Transform:
   m_ObjectHideFlags: 0
@@ -4036,7 +4067,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2107120053}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.694328, y: 21.741793, z: -34.45684}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

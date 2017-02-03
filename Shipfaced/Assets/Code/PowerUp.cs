@@ -6,6 +6,7 @@ public class PowerUp : MonoBehaviour
 {
     public PowerUpManager powerUpManager;
 
+
     void Start()
     {
         powerUpManager = GameObject.Find("PowerUpManager").GetComponent<PowerUpManager>();
@@ -18,6 +19,7 @@ public class PowerUp : MonoBehaviour
             if (c.gameObject.transform.parent.parent.gameObject.GetComponent<SimpleCarController>() == powerUpManager.playerManager.GetComponent<PlayerManager>().players[i])
             {
                 powerUpManager.activatingPlayer = i;
+                powerUpManager.target = FirstPlayer();
                 break;
             }
         }
@@ -25,4 +27,11 @@ public class PowerUp : MonoBehaviour
         powerUpManager.powerUps[Random.Range(0, powerUpManager.powerUps.Count)]();
     }
 
+    GameObject FirstPlayer()
+    {
+        GameObject firstPlayer = null;
+        //Use Spawn areas as checkpoints? 
+
+        return firstPlayer;
+    }
 }
