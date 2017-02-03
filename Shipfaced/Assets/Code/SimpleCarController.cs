@@ -12,7 +12,7 @@ public class AxleInfo
     public WheelCollider rightWheel;
     public bool motor;
     public bool steering;
-    
+
 }
 
 public class SimpleCarController : MonoBehaviour
@@ -91,6 +91,8 @@ public class SimpleCarController : MonoBehaviour
             ApplyLocalPositionToVisuals(axleInfo.rightWheel);
         }
     }
+
+    //End of code taken from link mentioned above
 
     public void ShuffleKeys()
     {

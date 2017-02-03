@@ -13,13 +13,17 @@ public class PlayerManager : MonoBehaviour
     public Text textPrefab;
 
     //List for the players' controls text.
-    public List<Text> textList; 
+    public List<Text> textList;
     bool isTimerRunning;
     bool isStartTimerRunning;
     [SerializeField]
     Text startTimerText;
     [SerializeField]
     Text shuffleTimerText;
+
+    //Power Up Related
+    public int playerSkip;
+    public bool skip = false;
 
     public List<KeyCode> remainingKeys = new List<KeyCode>();
 
@@ -122,8 +126,6 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-
-
     // Use this for initialization
     void Start()
     {
@@ -155,7 +157,7 @@ public class PlayerManager : MonoBehaviour
         {
             startTimerText.text = i.ToString();
             yield return new WaitForSeconds(1);
-            
+
         }
 
         startTimerText.gameObject.SetActive(false);
@@ -177,15 +179,20 @@ public class PlayerManager : MonoBehaviour
         isTimerRunning = true;
         float timeBetweenShuffle = seconds;
 
-        while(timeBetweenShuffle > 0)
+        while (timeBetweenShuffle > 0)
         {
             timeBetweenShuffle -= Time.deltaTime;
             shuffleTimerText.text = "Control shuffle in: " + ((int)(timeBetweenShuffle)).ToString();
             yield return null;
         }
-        
+
         for (int i = 0; i < players.Length; i++)
         {
+            if (skip && i == playerSkip)
+            {
+                skip = false;
+                continue;
+            }
             players[i].ShuffleKeys();
             textList[i].text = "P" + (i + 1) + ": " + players[i].leftKey.ToString() + " || " + players[i].rightKey.ToString();
         }
