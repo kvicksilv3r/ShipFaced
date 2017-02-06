@@ -131,7 +131,9 @@ public class PlayerManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        playerAmount = UIManager.playerCount;
         StartCoroutine("StartTimer", 3);
+        
     }
 
     IEnumerator StartTimer(int seconds)
