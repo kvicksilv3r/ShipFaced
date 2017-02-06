@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44528174, g: 0.48923677, b: 0.54336035, a: 1}
+  m_IndirectSpecularColor: {r: 0.44528198, g: 0.48923784, b: 0.5433612, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -350,8 +350,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 176934317}
-  m_LocalRotation: {x: 0.39436492, y: 0.00880076, z: 0.0037727947, w: -0.91890407}
-  m_LocalPosition: {x: -20.348705, y: -43.58283, z: -52.494225}
+  m_LocalRotation: {x: -0.669559, y: -0.00000028827705, z: -0.00000028673242, w: 0.74275887}
+  m_LocalPosition: {x: 0, y: -65.46, z: -9.100001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2110,6 +2110,7 @@ GameObject:
   - component: {fileID: 1045745680}
   - component: {fileID: 1045745679}
   - component: {fileID: 1045745678}
+  - component: {fileID: 1045745681}
   m_Layer: 5
   m_Name: StartTimerText
   m_TagString: Untagged
@@ -2188,6 +2189,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1045745676}
+--- !u!95 &1045745681
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045745676}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d4e410e68533774d9dbb07fa496cf86, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &1067099839 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 302cf869a736585409832570032199c3, type: 3}
@@ -3114,6 +3132,8 @@ MonoBehaviour:
   uICanvas: {fileID: 732147986}
   textPrefab: {fileID: 114027423498678386, guid: 3e284bdb91b1603498160ce07a936122,
     type: 2}
+  startTextAnimator: {fileID: 1045745681}
+  shuffleTextAnimator: {fileID: 1865682501}
   textList: []
   startTimerText: {fileID: 1045745679}
   shuffleTimerText: {fileID: 1865682499}
@@ -3351,6 +3371,7 @@ GameObject:
   - component: {fileID: 1865682500}
   - component: {fileID: 1865682499}
   - component: {fileID: 1865682498}
+  - component: {fileID: 1865682501}
   m_Layer: 5
   m_Name: ShuffleTimerText
   m_TagString: Untagged
@@ -3429,6 +3450,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1865682496}
+--- !u!95 &1865682501
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865682496}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 48eb2df15c4a0eb4d8eaffc561568625, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1887115568
 GameObject:
   m_ObjectHideFlags: 0

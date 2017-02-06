@@ -11,6 +11,8 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
     public GameObject uICanvas;
     public Text textPrefab;
+    public Animator startTextAnimator;
+    public Animator shuffleTextAnimator;
 
     //List for the players' controls text.
     public List<Text> textList;
@@ -137,6 +139,8 @@ public class PlayerManager : MonoBehaviour
         isStartTimerRunning = true;
         isTimerRunning = false;
         players = new SimpleCarController[playerAmount];
+        startTextAnimator = startTimerText.GetComponent<Animator>();
+
         for (int i = 0; i < playerAmount; i++)
         {
             GameObject tempBoat = (GameObject)Instantiate(boatPrefab, new Vector3(boatPrefab.transform.position.x + (i * 5), boatPrefab.transform.position.y, boatPrefab.transform.position.z), Quaternion.identity);
@@ -156,6 +160,7 @@ public class PlayerManager : MonoBehaviour
         for (int i = seconds; i > 0; i--)
         {
             startTimerText.text = i.ToString();
+            startTextAnimator.Play("StartTextAnim", -1);
             yield return new WaitForSeconds(1);
 
         }
@@ -175,6 +180,7 @@ public class PlayerManager : MonoBehaviour
     //Method to shuffle the controls at a regular interval.
     IEnumerator TimerForShuffle(float seconds)
     {
+        shuffleTextAnimator.SetBool("timerIsShown", false);
         shuffleTimerText.gameObject.SetActive(true);
         isTimerRunning = true;
         float timeBetweenShuffle = seconds;
@@ -182,7 +188,11 @@ public class PlayerManager : MonoBehaviour
         while (timeBetweenShuffle > 0)
         {
             timeBetweenShuffle -= Time.deltaTime;
-            shuffleTimerText.text = "Control shuffle in: " + ((int)(timeBetweenShuffle)).ToString();
+            shuffleTimerText.text = "Control shuffle in: " + (((int)(timeBetweenShuffle)) + 1).ToString();
+            if (!shuffleTextAnimator.GetBool("timerIsShown") && timeBetweenShuffle <= 5)
+            {
+                shuffleTextAnimator.SetBool("timerIsShown", true);
+            }
             yield return null;
         }
 

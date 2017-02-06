@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/ShipFaced.unity
+- path: Assets/Scenes/ShipFaced.unity
   isLoaded: 1
   isActive: 1
