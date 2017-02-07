@@ -17,13 +17,13 @@ public class PowerUpManager : MonoBehaviour
     void Awake()
     {
         playerManager = GameObject.Find("PlayerManager");
-        powerUps.Add(PowerUpShuffleOthers);
-        powerUps.Add(PowerUpSwitchLROthers);
-        powerUps.Add(PowerUpSkipShuffle);
-        powerUps.Add(PowerUpDisableOtherTrails);
-        powerUps.Add(PowerUpSwitchControls);
-        powerUps.Add(PowerUpStop);
-        // powerUps.Add(PowerUpBeer);
+        //powerUps.Add(PowerUpShuffleOthers);
+        //powerUps.Add(PowerUpSwitchLROthers);
+        //powerUps.Add(PowerUpSkipShuffle);
+        // powerUps.Add(PowerUpDisableOtherTrails);
+        //powerUps.Add(PowerUpSwitchControls);
+        //powerUps.Add(PowerUpStop);
+        powerUps.Add(PowerUpBeer);
     }
 
     void PowerUpShuffleOthers()
@@ -170,12 +170,12 @@ public class PowerUpManager : MonoBehaviour
         thrownBeer.GetComponent<Rigidbody>().velocity = CalculateArc(target, playerManager.GetComponent<PlayerManager>().players[activatingPlayer].gameObject);
         beerFlying = true;
         StartCoroutine(ReCalculate(thrownBeer, target));
-        Destroy(thrownBeer, 10f);
     }
     public Vector3 CalculateArc(GameObject target, GameObject location)
     {
         Vector3 direction = target.transform.position - location.transform.position;
         float height = direction.y;
+        height *= 3;
         direction.y = 0;
         float distance = direction.magnitude;
         if (location.transform.position.y >= 15)
@@ -193,11 +193,32 @@ public class PowerUpManager : MonoBehaviour
     }
     IEnumerator ReCalculate(GameObject thrownBeer, GameObject target)
     {
+        yield return new WaitForSeconds(.3f);
         while (beerFlying)
         {
             thrownBeer.transform.LookAt(target.transform);
             thrownBeer.GetComponent<Rigidbody>().velocity = CalculateArc(target, thrownBeer);
             yield return new WaitForSeconds(0.2f);
+        }
+    }
+    public void BeerControlsMethod(GameObject target)
+    {
+        StartCoroutine(BeerControls(target));
+    }
+    IEnumerator BeerControls(GameObject target)
+    {
+        foreach (WheelCollider wheel in target.GetComponentsInChildren<WheelCollider>())
+        {
+            WheelFrictionCurve tempWheel = wheel.forwardFriction;
+            tempWheel.stiffness = 200f;
+            wheel.forwardFriction = tempWheel;
+        }
+        yield return new WaitForSeconds(5f);
+        foreach (WheelCollider wheel in target.GetComponentsInChildren<WheelCollider>())
+        {
+            WheelFrictionCurve tempWheel = wheel.forwardFriction;
+            tempWheel.stiffness = 85f;
+            wheel.forwardFriction = tempWheel;
         }
     }
 

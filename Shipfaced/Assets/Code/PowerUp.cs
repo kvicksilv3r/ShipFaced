@@ -14,24 +14,30 @@ public class PowerUp : MonoBehaviour
 
     void OnTriggerEnter(Collider c)
     {
+        if (!c.gameObject.name.Contains("Boat"))
+        {
+            return;
+        }
         for (int i = 0; i < powerUpManager.playerManager.GetComponent<PlayerManager>().players.Length; i++)
         {
-            if (c.gameObject.transform.parent.parent.gameObject.GetComponent<SimpleCarController>() == powerUpManager.playerManager.GetComponent<PlayerManager>().players[i])
+            if (c.gameObject.transform.parent.gameObject.GetComponent<SimpleCarController>() == powerUpManager.playerManager.GetComponent<PlayerManager>().players[i])
             {
                 powerUpManager.activatingPlayer = i;
                 powerUpManager.target = FirstPlayer();
                 break;
             }
         }
-        Destroy(gameObject);
         powerUpManager.powerUps[Random.Range(0, powerUpManager.powerUps.Count)]();
+        Destroy(gameObject);
     }
 
     GameObject FirstPlayer()
     {
-        GameObject firstPlayer = null;
-        //Use Spawn areas as checkpoints? 
+        PlayerManager pM = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 
+        GameObject firstPlayer = null;
+        pM.CheckPositions();
+        firstPlayer = pM.players[pM.playerPositions[0]].gameObject;
         return firstPlayer;
     }
 }
