@@ -42,7 +42,6 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-
         remainingKeys.Add(KeyCode.Escape);
         remainingKeys.Add(KeyCode.F1);
         remainingKeys.Add(KeyCode.F2);
@@ -125,7 +124,6 @@ public class PlayerManager : MonoBehaviour
         remainingKeys.Add(KeyCode.Mouse1);
         remainingKeys.Add(KeyCode.Mouse2);
         remainingKeys.Add(KeyCode.Tab);
-
     }
 
     // Use this for initialization
@@ -133,7 +131,6 @@ public class PlayerManager : MonoBehaviour
     {
         playerAmount = UIManager.playerCount;
         StartCoroutine("StartTimer", 3);
-        
     }
 
     IEnumerator StartTimer(int seconds)
@@ -148,11 +145,13 @@ public class PlayerManager : MonoBehaviour
             GameObject tempBoat = (GameObject)Instantiate(boatPrefab, new Vector3(boatPrefab.transform.position.x + (i * 5), boatPrefab.transform.position.y, boatPrefab.transform.position.z), Quaternion.identity);
             tempBoat.name = "Player " + (i + 1);
             players[i] = tempBoat.GetComponent<SimpleCarController>();
+			players[i].playerColor = RandomizeColor();
             players[i].ShuffleKeys();
             players[i].enabled = false;
             Text tempText = Instantiate(textPrefab, uICanvas.transform);
             tempText.text = "P" + (i + 1) + ": " + players[i].leftKey.ToString() + " || " + players[i].rightKey.ToString();
             tempText.transform.localScale = new Vector3(tempText.transform.localScale.x * 0.75f, tempText.transform.localScale.y * 0.75f, tempText.transform.localScale.z * 0.75f);
+			tempText.GetComponent<Text>().color = players[i].playerColor;
             textList.Add(tempText);
 
         }
@@ -174,10 +173,7 @@ public class PlayerManager : MonoBehaviour
             boat.enabled = true;
         }
         isStartTimerRunning = false;
-
-
     }
-
 
     //Method to shuffle the controls at a regular interval.
     IEnumerator TimerForShuffle(float seconds)
@@ -211,6 +207,24 @@ public class PlayerManager : MonoBehaviour
 
         isTimerRunning = false;
     }
+
+	Color RandomizeColor()
+	{
+		List<int> colors = new List<int>();
+		colors.Add(0);
+		colors.Add(1);
+		colors.Add(2);
+
+		Color randomCol = new Color();
+		int randomNumber = Random.Range(0, colors.Count);
+
+		randomCol[colors[randomNumber]] = 1;
+		colors.RemoveAt(randomNumber);
+
+		randomCol[colors[Random.Range(0, colors.Count)]] = Random.Range(0, 1f);
+		randomCol.a = 1;
+		return randomCol;
+	}
 
     // Update is called once per frame
     void Update()

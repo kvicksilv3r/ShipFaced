@@ -1094,10 +1094,10 @@ TrailRenderer:
         rgba: 3875471495
       key1:
         serializedVersion: 2
-        rgba: 566573187
+        rgba: 569673160
       key2:
         serializedVersion: 2
-        rgba: 10114685
+        rgba: 16025032
       key3:
         serializedVersion: 2
         rgba: 16025032
@@ -1114,8 +1114,8 @@ TrailRenderer:
         serializedVersion: 2
         rgba: 0
       ctime0: 0
-      ctime1: 21974
-      ctime2: 40285
+      ctime1: 65535
+      ctime2: 54741
       ctime3: 54741
       ctime4: 65535
       ctime5: 65535
@@ -1130,7 +1130,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_NumColorKeys: 4
+      m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
@@ -1165,6 +1165,7 @@ MonoBehaviour:
   maxMotorTorque: 20000
   maxSteeringAngle: 50
   maxBreakTorque: 10000
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!135 &135020276379182406
 SphereCollider:
   m_ObjectHideFlags: 1

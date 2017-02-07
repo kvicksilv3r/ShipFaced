@@ -25,6 +25,7 @@ public class SimpleCarController : MonoBehaviour
     public float maxMotorTorque;
     public float maxSteeringAngle;
     public float maxBreakTorque;
+	public Color playerColor;
     float motor;
     PlayerManager pM;
 
@@ -57,6 +58,9 @@ public class SimpleCarController : MonoBehaviour
     {
         nameOfCar = "";
         motor = maxMotorTorque;
+		TrailRenderer tr = transform.FindChild("Trail").GetComponent<TrailRenderer>();
+		tr.startColor = playerColor;
+		tr.endColor = playerColor - new Color(0, 0, 0, 1);
     }
 
     public void FixedUpdate()
