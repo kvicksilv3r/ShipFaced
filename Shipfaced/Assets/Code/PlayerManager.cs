@@ -22,12 +22,16 @@ public class PlayerManager : MonoBehaviour
     Text startTimerText;
     [SerializeField]
     Text shuffleTimerText;
+    public List<KeyCode> remainingKeys = new List<KeyCode>();
 
     //Power Up Related
     public int playerSkip;
     public bool skip = false;
 
-    public List<KeyCode> remainingKeys = new List<KeyCode>();
+    public List<int> playerPositions = new List<int>();
+    public List<int> nextCheckpoint = new List<int>();
+    public List<GameObject> checkpoints = new List<GameObject>();
+
 
     void Awake()
     {
@@ -154,6 +158,7 @@ public class PlayerManager : MonoBehaviour
             tempText.text = "P" + (i + 1) + ": " + players[i].leftKey.ToString() + " || " + players[i].rightKey.ToString();
             tempText.transform.localScale = new Vector3(tempText.transform.localScale.x * 0.75f, tempText.transform.localScale.y * 0.75f, tempText.transform.localScale.z * 0.75f);
             textList.Add(tempText);
+            nextCheckpoint.Add(0);
 
         }
 
@@ -218,6 +223,51 @@ public class PlayerManager : MonoBehaviour
         if (!isTimerRunning && !isStartTimerRunning)
         {
             StartCoroutine("TimerForShuffle", 30);
+        }
+    }
+
+
+    //Method for Player Positions
+    public void CheckPositions()
+    {
+        playerPositions.Clear();
+
+        bool check = false;
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (i == 0)
+            {
+                playerPositions.Add(i);
+            }
+            else
+            {
+                int j;
+                for (j = 0; j < playerPositions.Count; j++)
+                {
+                    if (nextCheckpoint[playerPositions[j]] < nextCheckpoint[i])
+                    {
+                        check = true;
+                        break;
+                    }
+                    else if (nextCheckpoint[playerPositions[j]] == nextCheckpoint[i])
+                    {
+                        if (Vector3.Distance(checkpoints[nextCheckpoint[playerPositions[j]]].transform.position, players[j].transform.position) < Vector3.Distance(checkpoints[nextCheckpoint[i]].transform.position, players[i].transform.position))
+                        {
+                            check = true;
+                            break;
+                        }
+                    }
+                }
+                if (check)
+                {
+                    playerPositions.Insert(j, i);
+                }
+                else
+                {
+                    playerPositions.Add(i);
+                }
+            }
         }
     }
 }
