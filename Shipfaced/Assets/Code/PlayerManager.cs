@@ -128,14 +128,14 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    // Use this for initialization
     void Start()
     {
         playerAmount = UIManager.playerCount;
         StartCoroutine("StartTimer", 3);
-        
+
     }
 
+    //Method to start the timer at the beginning of the game, also instantiates the boats.
     IEnumerator StartTimer(int seconds)
     {
         isStartTimerRunning = true;
@@ -145,8 +145,8 @@ public class PlayerManager : MonoBehaviour
 
         for (int i = 0; i < playerAmount; i++)
         {
-            GameObject tempBoat = (GameObject)Instantiate(boatPrefab, new Vector3(boatPrefab.transform.position.x + (i * 5), boatPrefab.transform.position.y, boatPrefab.transform.position.z), Quaternion.identity);
-            tempBoat.name = "Player " + (i + 1);
+            GameObject tempBoat = (GameObject)Instantiate(boatPrefab, new Vector3(boatPrefab.transform.position.x + ((i % 5) * 4f), boatPrefab.transform.position.y, (boatPrefab.transform.position.z - 5 * (i / 5) + 10 * (i / 5))), Quaternion.identity);
+            tempBoat.GetComponent<SimpleCarController>().nameOfCar = "Player " + (i + 1);
             players[i] = tempBoat.GetComponent<SimpleCarController>();
             players[i].ShuffleKeys();
             players[i].enabled = false;
@@ -212,12 +212,12 @@ public class PlayerManager : MonoBehaviour
         isTimerRunning = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Start the timer for the shuffling of controls, if it is not already running and the starttimer has ceased running.
         if (!isTimerRunning && !isStartTimerRunning)
         {
-            StartCoroutine("TimerForShuffle", 30);
+            StartCoroutine("TimerForShuffle", 20);
         }
     }
 }

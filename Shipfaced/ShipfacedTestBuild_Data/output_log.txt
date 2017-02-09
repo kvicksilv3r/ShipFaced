@@ -19,9 +19,28 @@ Platform assembly: C:\Users\meppa\Documents\GitHub\Shipfaced\Shipfaced\Shipfaced
 Loading C:\Users\meppa\Documents\GitHub\Shipfaced\Shipfaced\ShipfacedTestBuild_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\meppa\Documents\GitHub\Shipfaced\Shipfaced\ShipfacedTestBuild_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
 Loading C:\Users\meppa\Documents\GitHub\Shipfaced\Shipfaced\ShipfacedTestBuild_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
-- Completed reload, in  0.147 seconds
+- Completed reload, in  0.146 seconds
 Platform assembly: C:\Users\meppa\Documents\GitHub\Shipfaced\Shipfaced\ShipfacedTestBuild_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\meppa\Documents\GitHub\Shipfaced\Shipfaced\ShipfacedTestBuild_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 2.937285 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 14c8 -> priority: 1 
+  Thread -> id: 24e4 -> priority: 1 
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.352495 ms
+
+Unloading 44 unused Assets to reduce memory usage. Loaded Objects now: 1320.
+Total: 0.516345 ms (FindLiveObjects: 0.077827 ms CreateObjectMapping: 0.026469 ms MarkObjects: 0.217679 ms  DeleteObjects: 0.194370 ms)
+
+Skip Next Shuffle!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Shuffle!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+

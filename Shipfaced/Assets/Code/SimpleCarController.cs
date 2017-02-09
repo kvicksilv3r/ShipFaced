@@ -55,7 +55,6 @@ public class SimpleCarController : MonoBehaviour
 
     private void Start()
     {
-        nameOfCar = "";
         motor = maxMotorTorque;
     }
 
@@ -94,10 +93,12 @@ public class SimpleCarController : MonoBehaviour
 
     //End of code taken from link mentioned above
 
+    //Method to shuffle the controls
     public void ShuffleKeys()
     {
-        if (leftKey != KeyCode.None || rightKey != KeyCode.None)
+        if (leftKey == KeyCode.None && rightKey == KeyCode.None)
         {
+           
             int temp = Random.Range(0, pM.remainingKeys.Count);
             leftKey = pM.remainingKeys[temp];
             pM.remainingKeys.RemoveAt(temp);

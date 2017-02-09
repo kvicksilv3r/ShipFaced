@@ -21,9 +21,26 @@ public class UIManager : MonoBehaviour
     int tempIndex;
     public static int playerCount;
 
+
+    //Method to set the player count for the game.
+    //If <2 is given, the player count is set to 2.
+    //If > 20 is given, the player count is set to 20.
     public void SetPlayerCount()
     {
-        playerCount = int.Parse(inputFieldText.text);
+        if (int.Parse(inputFieldText.text) <= 20 && int.Parse(inputFieldText.text) >= 2 )
+        {
+            playerCount = int.Parse(inputFieldText.text);
+        }
+
+        else if(int.Parse(inputFieldText.text) < 2)
+        {
+            playerCount = 2;
+        }
+
+        else
+        {
+            playerCount = 20;
+        }
         SceneManager.LoadScene("ShipFaced");
     }
 
@@ -40,7 +57,7 @@ public class UIManager : MonoBehaviour
         {
             case 0:
                 inputFieldAnimator.SetBool("isPlayPressed", true);
-                foreach(Button b in buttons)
+                foreach (Button b in buttons)
                 {
                     b.enabled = false;
                 }
@@ -52,11 +69,11 @@ public class UIManager : MonoBehaviour
                 return;
         }
 
-   
-      
+
+
     }
 
-    public void SelectButton( int indexOfButton)
+    public void SelectButton(int indexOfButton)
     {
         if (selectedButton != indexOfButton)
         {
@@ -86,19 +103,17 @@ public class UIManager : MonoBehaviour
         tempIndex = selectedButton;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //Navigate down on the main menu with the down-arrow
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            
             if (selectedButton < 2)
             {
                 tempIndex++;
                 SelectButton(tempIndex);
-
             }
+
             else
             {
                 tempIndex = 0;
@@ -106,6 +121,7 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        //Navigate up on the main menu with the up-arrow
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (selectedButton > 0)
