@@ -1178,6 +1178,7 @@ MonoBehaviour:
   quitButton: {fileID: 1003732752}
   inputFieldText: {fileID: 1932328442}
   keyBoard: {fileID: 1708112501}
+  inputPlayersText: {fileID: 1439304033}
   logo: {fileID: 768055539}
 --- !u!4 &872670515
 Transform:
@@ -1811,7 +1812,7 @@ GameObject:
   - component: {fileID: 1439304035}
   - component: {fileID: 1439304037}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: InputPlayers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

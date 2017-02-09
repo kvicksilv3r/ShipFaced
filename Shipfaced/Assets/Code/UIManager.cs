@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     int tempIndex;
     public static int playerCount;
     public GameObject keyBoard;
+	public GameObject inputPlayersText;
     public GameObject logo;
 
 
@@ -62,6 +63,7 @@ public class UIManager : MonoBehaviour
             case 0:
                 inputFieldAnimator.SetBool("isPlayPressed", true);
 				DeactivateButtons();
+				inputPlayersText.GetComponent<Text>().text = "Insert player amount 2-" + (GameObject.Find("GlobalGameObject").GetComponent<GlobalGameObject>().keys.Count/2) + ":";
                 return;
             case 1:
                 keyBoard.SetActive(true);
