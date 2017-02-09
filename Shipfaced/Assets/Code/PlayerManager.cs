@@ -280,7 +280,7 @@ public class PlayerManager : MonoBehaviour
                 completeString += "Keypad 9 || ";
                 break;
             case KeyCode.Minus:
-                completeString += "Hyphen || ";
+                completeString += "- || ";
                 break;
             case KeyCode.Slash:
                 completeString += "' || ";
