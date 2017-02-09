@@ -5,9 +5,11 @@ using UnityEngine;
 public class KeyboardManager : MonoBehaviour
 {
     public List<KeyCode> keys = new List<KeyCode>();
+    public GameObject globalGameObject;
 
-    void Start()
+    void Awake()
     {
+        globalGameObject = GameObject.Find("GlobalGameObject");
         UpdateKeys();
     }
 
@@ -21,7 +23,12 @@ public class KeyboardManager : MonoBehaviour
                 keys.Add(toggle.gameObject.GetComponent<Key>().keyCode);
             }
         }
+        globalGameObject.GetComponent<GlobalGameObject>().keys.Clear();
+        foreach (KeyCode key in keys)
+        {
+            globalGameObject.GetComponent<GlobalGameObject>().keys.Add(key);
+        }
     }
 
-    
+
 }

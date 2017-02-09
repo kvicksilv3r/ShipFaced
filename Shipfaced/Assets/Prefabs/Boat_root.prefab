@@ -1151,7 +1151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfCar: 
   leftOrRight: 0
-  leftKey: 121
+  leftKey: 0
   rightKey: 0
   axleInfos:
   - leftWheel: {fileID: 146851256838229950}
