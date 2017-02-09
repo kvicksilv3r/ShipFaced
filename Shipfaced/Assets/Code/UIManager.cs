@@ -29,7 +29,9 @@ public class UIManager : MonoBehaviour
     //If > 20 is given, the player count is set to 20.
     public void SetPlayerCount()
     {
-        if (int.Parse(inputFieldText.text) <= 20 && int.Parse(inputFieldText.text) >= 2 )
+		int keyNum = GameObject.Find("GlobalGameObject").GetComponent<GlobalGameObject>().keys.Count / 2;
+
+        if (int.Parse(inputFieldText.text) <= keyNum && int.Parse(inputFieldText.text) >= 2 )
         {
             playerCount = int.Parse(inputFieldText.text);
         }
@@ -41,7 +43,7 @@ public class UIManager : MonoBehaviour
 
         else
         {
-            playerCount = 20;
+            playerCount = keyNum;
         }
         SceneManager.LoadScene("ShipFaced");
     }
@@ -55,14 +57,11 @@ public class UIManager : MonoBehaviour
             b.SetBool("isPressed", true);
         }
 
-        switch (indexOfButton)
+		switch (indexOfButton)
         {
             case 0:
                 inputFieldAnimator.SetBool("isPlayPressed", true);
-                foreach (Button b in buttons)
-                {
-                    b.enabled = false;
-                }
+				DeactivateButtons();
                 return;
             case 1:
                 keyBoard.SetActive(true);
@@ -71,11 +70,28 @@ public class UIManager : MonoBehaviour
             case 2:
                 Application.Quit();
                 return;
+
+			case 3:
+				keyBoard.SetActive(false);
+				logo.SetActive(true);
+				foreach (Animator b in buttonAnimators)
+				{
+					b.SetBool("isPressed", false);
+				}
+				break;
         }
 
 
 
     }
+
+	void DeactivateButtons()
+	{
+		foreach (Button b in buttons)
+		{
+			b.enabled = false;
+		}
+	}
 
     public void SelectButton(int indexOfButton)
     {
