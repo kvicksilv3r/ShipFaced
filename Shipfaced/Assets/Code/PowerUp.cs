@@ -27,7 +27,12 @@ public class PowerUp : MonoBehaviour
                 break;
             }
         }
-        powerUpManager.powerUps[Random.Range(0, powerUpManager.powerUps.Count)]();
+        int temp = Random.Range(0, powerUpManager.powerUps.Count);
+        if (temp == 4 && powerUpManager.playerManager.GetComponent<PlayerManager>().players.Length == 2)
+        {
+            temp = 2;
+        }
+        powerUpManager.powerUps[temp]();
         Destroy(gameObject);
     }
 
