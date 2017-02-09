@@ -5920,7 +5920,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 114117562416554784}
   toggleTransition: 1
-  graphic: {fileID: 0}
+  graphic: {fileID: 114389960658965252}
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
@@ -12550,7 +12550,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 114246961673947830}
   toggleTransition: 1
-  graphic: {fileID: 0}
+  graphic: {fileID: 114895075298089670}
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
@@ -20601,7 +20601,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 114831144303721550}
   toggleTransition: 1
-  graphic: {fileID: 0}
+  graphic: {fileID: 114616714213744766}
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
