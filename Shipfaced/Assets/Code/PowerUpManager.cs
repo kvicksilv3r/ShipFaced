@@ -23,7 +23,7 @@ public class PowerUpManager : MonoBehaviour
         powerUps.Add(PowerUpDisableOtherTrails);
         powerUps.Add(PowerUpSwitchControls);
         powerUps.Add(PowerUpStop);
-        // powerUps.Add(PowerUpBeer);
+        powerUps.Add(PowerUpBeer);
     }
 
     void PowerUpShuffleOthers()
@@ -35,8 +35,8 @@ public class PowerUpManager : MonoBehaviour
                 continue;
             }
             playerManager.GetComponent<PlayerManager>().players[i].ShuffleKeys();
-            playerManager.GetComponent<PlayerManager>().textList[i].text = "P" + (i + 1) + ": " + playerManager.GetComponent<PlayerManager>().players[i].leftKey.ToString() + " || " + playerManager.GetComponent<PlayerManager>().players[i].rightKey.ToString();
-        }
+            playerManager.GetComponent<PlayerManager>().textList[i].text = playerManager.GetComponent<PlayerManager>().PlayerControlsString(i, playerManager.GetComponent<PlayerManager>().players[i].leftKey, playerManager.GetComponent<PlayerManager>().players[i].rightKey);
+                }
         print("Shuffle!");
     }
 
@@ -52,7 +52,7 @@ public class PowerUpManager : MonoBehaviour
             temp = playerManager.GetComponent<PlayerManager>().players[i].leftKey;
             playerManager.GetComponent<PlayerManager>().players[i].leftKey = playerManager.GetComponent<PlayerManager>().players[i].rightKey;
             playerManager.GetComponent<PlayerManager>().players[i].rightKey = temp;
-            playerManager.GetComponent<PlayerManager>().textList[i].text = "P" + (i + 1) + ": " + playerManager.GetComponent<PlayerManager>().players[i].leftKey.ToString() + " || " + playerManager.GetComponent<PlayerManager>().players[i].rightKey.ToString();
+            playerManager.GetComponent<PlayerManager>().textList[i].text = playerManager.GetComponent<PlayerManager>().PlayerControlsString(i, playerManager.GetComponent<PlayerManager>().players[i].leftKey, playerManager.GetComponent<PlayerManager>().players[i].rightKey);
         }
         print("Switch!");
     }
@@ -119,7 +119,7 @@ public class PowerUpManager : MonoBehaviour
 
             prevLeft = tempLeft;
             prevRight = tempRight;
-            playerManager.GetComponent<PlayerManager>().textList[i].text = "P" + (i + 1) + ": " + playerManager.GetComponent<PlayerManager>().players[i].leftKey.ToString() + " || " + playerManager.GetComponent<PlayerManager>().players[i].rightKey.ToString();
+            playerManager.GetComponent<PlayerManager>().textList[i].text = playerManager.GetComponent<PlayerManager>().PlayerControlsString(i, playerManager.GetComponent<PlayerManager>().players[i].leftKey, playerManager.GetComponent<PlayerManager>().players[i].rightKey);
         }
         int temp;
         if (activatingPlayer != 0)
@@ -133,7 +133,7 @@ public class PowerUpManager : MonoBehaviour
 
         playerManager.GetComponent<PlayerManager>().players[temp].leftKey = lastLeft;
         playerManager.GetComponent<PlayerManager>().players[temp].rightKey = lastRight;
-        playerManager.GetComponent<PlayerManager>().textList[temp].text = "P" + (temp + 1) + ": " + playerManager.GetComponent<PlayerManager>().players[temp].leftKey.ToString() + " || " + playerManager.GetComponent<PlayerManager>().players[temp].rightKey.ToString();
+        playerManager.GetComponent<PlayerManager>().textList[temp].text = playerManager.GetComponent<PlayerManager>().PlayerControlsString(temp, playerManager.GetComponent<PlayerManager>().players[temp].leftKey, playerManager.GetComponent<PlayerManager>().players[temp].rightKey);
 
         print("Switch Controls with others!");
     }
@@ -170,12 +170,12 @@ public class PowerUpManager : MonoBehaviour
         thrownBeer.GetComponent<Rigidbody>().velocity = CalculateArc(target, playerManager.GetComponent<PlayerManager>().players[activatingPlayer].gameObject);
         beerFlying = true;
         StartCoroutine(ReCalculate(thrownBeer, target));
-        Destroy(thrownBeer, 10f);
     }
     public Vector3 CalculateArc(GameObject target, GameObject location)
     {
         Vector3 direction = target.transform.position - location.transform.position;
         float height = direction.y;
+        height *= 3;
         direction.y = 0;
         float distance = direction.magnitude;
         if (location.transform.position.y >= 15)
@@ -193,11 +193,32 @@ public class PowerUpManager : MonoBehaviour
     }
     IEnumerator ReCalculate(GameObject thrownBeer, GameObject target)
     {
+        yield return new WaitForSeconds(.3f);
         while (beerFlying)
         {
             thrownBeer.transform.LookAt(target.transform);
             thrownBeer.GetComponent<Rigidbody>().velocity = CalculateArc(target, thrownBeer);
             yield return new WaitForSeconds(0.2f);
+        }
+    }
+    public void BeerControlsMethod(GameObject target)
+    {
+        StartCoroutine(BeerControls(target));
+    }
+    IEnumerator BeerControls(GameObject target)
+    {
+        foreach (WheelCollider wheel in target.GetComponentsInChildren<WheelCollider>())
+        {
+            WheelFrictionCurve tempWheel = wheel.forwardFriction;
+            tempWheel.stiffness = 200f;
+            wheel.forwardFriction = tempWheel;
+        }
+        yield return new WaitForSeconds(5f);
+        foreach (WheelCollider wheel in target.GetComponentsInChildren<WheelCollider>())
+        {
+            WheelFrictionCurve tempWheel = wheel.forwardFriction;
+            tempWheel.stiffness = 85f;
+            wheel.forwardFriction = tempWheel;
         }
     }
 
