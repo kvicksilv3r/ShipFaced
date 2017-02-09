@@ -20,8 +20,6 @@ public class UIManager : MonoBehaviour
     Button[] buttons;
     int tempIndex;
     public static int playerCount;
-    public GameObject keyBoard;
-    public GameObject logo;
 
     public void SetPlayerCount()
     {
@@ -48,8 +46,6 @@ public class UIManager : MonoBehaviour
                 }
                 return;
             case 1:
-                keyBoard.SetActive(true);
-                logo.SetActive(false);
                 return;
             case 2:
                 Application.Quit();

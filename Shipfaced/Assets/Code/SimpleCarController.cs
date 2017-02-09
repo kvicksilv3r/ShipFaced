@@ -100,7 +100,7 @@ public class SimpleCarController : MonoBehaviour
 
     public void ShuffleKeys()
     {
-        if (leftKey == KeyCode.None && rightKey == KeyCode.None)
+        if (leftKey != KeyCode.None || rightKey != KeyCode.None)
         {
             int temp = Random.Range(0, pM.remainingKeys.Count);
             leftKey = pM.remainingKeys[temp];

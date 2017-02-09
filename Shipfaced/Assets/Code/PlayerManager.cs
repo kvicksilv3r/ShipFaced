@@ -46,17 +46,94 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        remainingKeys.Add(KeyCode.Escape);
+        remainingKeys.Add(KeyCode.F1);
+        remainingKeys.Add(KeyCode.F2);
+        remainingKeys.Add(KeyCode.F3);
+        remainingKeys.Add(KeyCode.F4);
+        remainingKeys.Add(KeyCode.F5);
+        remainingKeys.Add(KeyCode.F6);
+        remainingKeys.Add(KeyCode.F7);
+        remainingKeys.Add(KeyCode.F8);
+        remainingKeys.Add(KeyCode.F9);
+        remainingKeys.Add(KeyCode.F10);
+        remainingKeys.Add(KeyCode.F11);
+        remainingKeys.Add(KeyCode.F12);
+        remainingKeys.Add(KeyCode.Alpha0);
+        remainingKeys.Add(KeyCode.Alpha1);
+        remainingKeys.Add(KeyCode.Alpha2);
+        remainingKeys.Add(KeyCode.Alpha3);
+        remainingKeys.Add(KeyCode.Alpha4);
+        remainingKeys.Add(KeyCode.Alpha5);
+        remainingKeys.Add(KeyCode.Alpha6);
+        remainingKeys.Add(KeyCode.Alpha7);
+        remainingKeys.Add(KeyCode.Alpha8);
+        remainingKeys.Add(KeyCode.Alpha9);
+        remainingKeys.Add(KeyCode.Q);
+        remainingKeys.Add(KeyCode.W);
+        remainingKeys.Add(KeyCode.E);
+        remainingKeys.Add(KeyCode.R);
+        remainingKeys.Add(KeyCode.T);
+        remainingKeys.Add(KeyCode.Y);
+        remainingKeys.Add(KeyCode.U);
+        remainingKeys.Add(KeyCode.I);
+        remainingKeys.Add(KeyCode.O);
+        remainingKeys.Add(KeyCode.P);
+        remainingKeys.Add(KeyCode.A);
+        remainingKeys.Add(KeyCode.S);
+        remainingKeys.Add(KeyCode.D);
+        remainingKeys.Add(KeyCode.F);
+        remainingKeys.Add(KeyCode.G);
+        remainingKeys.Add(KeyCode.H);
+        remainingKeys.Add(KeyCode.J);
+        remainingKeys.Add(KeyCode.K);
+        remainingKeys.Add(KeyCode.L);
+        remainingKeys.Add(KeyCode.Z);
+        remainingKeys.Add(KeyCode.X);
+        remainingKeys.Add(KeyCode.C);
+        remainingKeys.Add(KeyCode.V);
+        remainingKeys.Add(KeyCode.B);
+        remainingKeys.Add(KeyCode.N);
+        remainingKeys.Add(KeyCode.M);
+        remainingKeys.Add(KeyCode.Comma);
+        remainingKeys.Add(KeyCode.Period);
+        remainingKeys.Add(KeyCode.Minus);
+        remainingKeys.Add(KeyCode.Space);
+        remainingKeys.Add(KeyCode.LeftArrow);
+        remainingKeys.Add(KeyCode.UpArrow);
+        remainingKeys.Add(KeyCode.DownArrow);
+        remainingKeys.Add(KeyCode.RightArrow);
+        remainingKeys.Add(KeyCode.Keypad0);
+        remainingKeys.Add(KeyCode.Keypad1);
+        remainingKeys.Add(KeyCode.Keypad2);
+        remainingKeys.Add(KeyCode.Keypad3);
+        remainingKeys.Add(KeyCode.Keypad4);
+        remainingKeys.Add(KeyCode.Keypad5);
+        remainingKeys.Add(KeyCode.Keypad6);
+        remainingKeys.Add(KeyCode.Keypad7);
+        remainingKeys.Add(KeyCode.Keypad8);
+        remainingKeys.Add(KeyCode.Keypad9);
+        remainingKeys.Add(KeyCode.KeypadDivide);
+        remainingKeys.Add(KeyCode.KeypadEnter);
+        remainingKeys.Add(KeyCode.KeypadMinus);
+        remainingKeys.Add(KeyCode.KeypadPlus);
+        remainingKeys.Add(KeyCode.KeypadMultiply);
+        remainingKeys.Add(KeyCode.Backspace);
+        remainingKeys.Add(KeyCode.Return);
+        remainingKeys.Add(KeyCode.PageDown);
+        remainingKeys.Add(KeyCode.PageUp);
+        remainingKeys.Add(KeyCode.Home);
+        remainingKeys.Add(KeyCode.Delete);
+        remainingKeys.Add(KeyCode.Mouse0);
+        remainingKeys.Add(KeyCode.Mouse1);
+        remainingKeys.Add(KeyCode.Mouse2);
+        remainingKeys.Add(KeyCode.Tab);
     }
 
     // Use this for initialization
     void Start()
     {
         playerAmount = UIManager.playerCount;
-        remainingKeys.Clear();
-        foreach (KeyCode key in GameObject.Find("GlobalGameObject").GetComponent<GlobalGameObject>().keys)
-        {
-            remainingKeys.Add(key);
-        }
         StartCoroutine("StartTimer", 3);
     }
 
@@ -72,13 +149,13 @@ public class PlayerManager : MonoBehaviour
             GameObject tempBoat = (GameObject)Instantiate(boatPrefab, new Vector3(boatPrefab.transform.position.x + (i * 5), boatPrefab.transform.position.y, boatPrefab.transform.position.z), Quaternion.identity);
             tempBoat.name = "Player " + (i + 1);
             players[i] = tempBoat.GetComponent<SimpleCarController>();
-            players[i].playerColor = RandomizeColor();
+			players[i].playerColor = RandomizeColor();
             players[i].ShuffleKeys();
             players[i].enabled = false;
             Text tempText = Instantiate(textPrefab, uICanvas.transform);
-            tempText.text = PlayerControlsString(i, players[i].leftKey, players[i].rightKey);
+            tempText.text = "P" + (i + 1) + ": " + players[i].leftKey.ToString() + " || " + players[i].rightKey.ToString();
             tempText.transform.localScale = new Vector3(tempText.transform.localScale.x * 0.75f, tempText.transform.localScale.y * 0.75f, tempText.transform.localScale.z * 0.75f);
-            tempText.GetComponent<Text>().color = players[i].playerColor;
+			tempText.GetComponent<Text>().color = players[i].playerColor;
             textList.Add(tempText);
             nextCheckpoint.Add(0);
 
@@ -130,29 +207,29 @@ public class PlayerManager : MonoBehaviour
                 continue;
             }
             players[i].ShuffleKeys();
-            textList[i].text = PlayerControlsString(i, players[i].leftKey, players[i].rightKey);
+            textList[i].text = "P" + (i + 1) + ": " + players[i].leftKey.ToString() + " || " + players[i].rightKey.ToString();
         }
 
         isTimerRunning = false;
     }
 
-    Color RandomizeColor()
-    {
-        List<int> colors = new List<int>();
-        colors.Add(0);
-        colors.Add(1);
-        colors.Add(2);
+	Color RandomizeColor()
+	{
+		List<int> colors = new List<int>();
+		colors.Add(0);
+		colors.Add(1);
+		colors.Add(2);
 
-        Color randomCol = new Color();
-        int randomNumber = Random.Range(0, colors.Count);
+		Color randomCol = new Color();
+		int randomNumber = Random.Range(0, colors.Count);
 
-        randomCol[colors[randomNumber]] = 1;
-        colors.RemoveAt(randomNumber);
+		randomCol[colors[randomNumber]] = 1;
+		colors.RemoveAt(randomNumber);
 
-        randomCol[colors[Random.Range(0, colors.Count)]] = Random.Range(0, 1f);
-        randomCol.a = 1;
-        return randomCol;
-    }
+		randomCol[colors[Random.Range(0, colors.Count)]] = Random.Range(0, 1f);
+		randomCol.a = 1;
+		return randomCol;
+	}
 
     // Update is called once per frame
     void Update()
@@ -206,217 +283,5 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    public string PlayerControlsString(int player, KeyCode left, KeyCode right)
-    {
-        string completeString;
-
-        completeString = "P" + (player + 1) + ": ";
-        switch (left)
-        {
-            case KeyCode.Alpha0:
-                completeString += "0 || ";
-                break;
-            case KeyCode.Alpha1:
-                completeString += "1 || ";
-                break;
-            case KeyCode.Alpha2:
-                completeString += "2 || ";
-                break;
-            case KeyCode.Alpha3:
-                completeString += "3 || ";
-                break;
-            case KeyCode.Alpha4:
-                completeString += "4 || ";
-                break;
-            case KeyCode.Alpha5:
-                completeString += "5 || ";
-                break;
-            case KeyCode.Alpha6:
-                completeString += "6 || ";
-                break;
-            case KeyCode.Alpha7:
-                completeString += "7 || ";
-                break;
-            case KeyCode.Alpha8:
-                completeString += "8 || ";
-                break;
-            case KeyCode.Alpha9:
-                completeString += "9 || ";
-                break;
-            case KeyCode.Keypad0:
-                completeString += "Keypad 0 || ";
-                break;
-            case KeyCode.Keypad1:
-                completeString += "Keypad 1 || ";
-                break;
-            case KeyCode.Keypad2:
-                completeString += "Keypad 2 || ";
-                break;
-            case KeyCode.Keypad3:
-                completeString += "Keypad 3 || ";
-                break;
-            case KeyCode.Keypad4:
-                completeString += "Keypad 4 || ";
-                break;
-            case KeyCode.Keypad5:
-                completeString += "Keypad 5 || ";
-                break;
-            case KeyCode.Keypad6:
-                completeString += "Keypad 6 || ";
-                break;
-            case KeyCode.Keypad7:
-                completeString += "Keypad 7 || ";
-                break;
-            case KeyCode.Keypad8:
-                completeString += "Keypad 8 || ";
-                break;
-            case KeyCode.Keypad9:
-                completeString += "Keypad 9 || ";
-                break;
-            case KeyCode.Minus:
-                completeString += "Hyphen || ";
-                break;
-            case KeyCode.Slash:
-                completeString += "' || ";
-                break;
-            case KeyCode.Semicolon:
-                completeString += "¨ || ";
-                break;
-            case KeyCode.LeftBracket:
-                completeString += "´ || ";
-                break;
-            case KeyCode.Backslash:
-                completeString += "§ || ";
-                break;
-            case KeyCode.RightBracket:
-                completeString += "Å || ";
-                break;
-            case KeyCode.BackQuote:
-                completeString += "Ö || ";
-                break;
-            case KeyCode.Quote:
-                completeString += "Ä || ";
-                break;
-            case KeyCode.LeftCommand:
-                completeString += "Windows || ";
-                break;
-            case KeyCode.Mouse0:
-                completeString += "Left Click || ";
-                break;
-            case KeyCode.Mouse1:
-                completeString += "Right Click || ";
-                break;
-            case KeyCode.Mouse2:
-                completeString += "Middle Mouse Button || ";
-                break;
-            default:
-                completeString += left.ToString() + " || ";
-                break;
-        }
-        switch (right)
-        {
-            case KeyCode.Alpha0:
-                completeString += "0";
-                break;
-            case KeyCode.Alpha1:
-                completeString += "1";
-                break;
-            case KeyCode.Alpha2:
-                completeString += "2";
-                break;
-            case KeyCode.Alpha3:
-                completeString += "3";
-                break;
-            case KeyCode.Alpha4:
-                completeString += "4";
-                break;
-            case KeyCode.Alpha5:
-                completeString += "5";
-                break;
-            case KeyCode.Alpha6:
-                completeString += "6";
-                break;
-            case KeyCode.Alpha7:
-                completeString += "7";
-                break;
-            case KeyCode.Alpha8:
-                completeString += "8";
-                break;
-            case KeyCode.Alpha9:
-                completeString += "9";
-                break;
-            case KeyCode.Keypad0:
-                completeString += "Keypad 0";
-                break;
-            case KeyCode.Keypad1:
-                completeString += "Keypad 1";
-                break;
-            case KeyCode.Keypad2:
-                completeString += "Keypad 2";
-                break;
-            case KeyCode.Keypad3:
-                completeString += "Keypad 3";
-                break;
-            case KeyCode.Keypad4:
-                completeString += "Keypad 4";
-                break;
-            case KeyCode.Keypad5:
-                completeString += "Keypad 5";
-                break;
-            case KeyCode.Keypad6:
-                completeString += "Keypad 6";
-                break;
-            case KeyCode.Keypad7:
-                completeString += "Keypad 7";
-                break;
-            case KeyCode.Keypad8:
-                completeString += "Keypad 8";
-                break;
-            case KeyCode.Keypad9:
-                completeString += "Keypad 9";
-                break;
-            case KeyCode.Minus:
-                completeString += "Hyphen";
-                break;
-            case KeyCode.Slash:
-                completeString += "'";
-                break;
-            case KeyCode.Semicolon:
-                completeString += "¨";
-                break;
-            case KeyCode.LeftBracket:
-                completeString += "´";
-                break;
-            case KeyCode.Backslash:
-                completeString += "§";
-                break;
-            case KeyCode.RightBracket:
-                completeString += "Å";
-                break;
-            case KeyCode.BackQuote:
-                completeString += "Ö";
-                break;
-            case KeyCode.Quote:
-                completeString += "Ä";
-                break;
-            case KeyCode.LeftCommand:
-                completeString += "Windows";
-                break;
-            case KeyCode.Mouse0:
-                completeString += "Left Click";
-                break;
-            case KeyCode.Mouse1:
-                completeString += "Right Click";
-                break;
-            case KeyCode.Mouse2:
-                completeString += "Middle Mouse Button";
-                break;
-            default:
-                completeString += right.ToString();
-                break;
-        }
-        return completeString;
     }
 }

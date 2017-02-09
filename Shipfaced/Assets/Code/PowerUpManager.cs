@@ -17,12 +17,12 @@ public class PowerUpManager : MonoBehaviour
     void Awake()
     {
         playerManager = GameObject.Find("PlayerManager");
-        powerUps.Add(PowerUpShuffleOthers);
-        powerUps.Add(PowerUpSwitchLROthers);
-        powerUps.Add(PowerUpSkipShuffle);
-        powerUps.Add(PowerUpDisableOtherTrails);
-        powerUps.Add(PowerUpSwitchControls);
-        powerUps.Add(PowerUpStop);
+        //powerUps.Add(PowerUpShuffleOthers);
+        //powerUps.Add(PowerUpSwitchLROthers);
+        //powerUps.Add(PowerUpSkipShuffle);
+        // powerUps.Add(PowerUpDisableOtherTrails);
+        //powerUps.Add(PowerUpSwitchControls);
+        //powerUps.Add(PowerUpStop);
         powerUps.Add(PowerUpBeer);
     }
 
@@ -35,8 +35,8 @@ public class PowerUpManager : MonoBehaviour
                 continue;
             }
             playerManager.GetComponent<PlayerManager>().players[i].ShuffleKeys();
-            playerManager.GetComponent<PlayerManager>().textList[i].text = playerManager.GetComponent<PlayerManager>().PlayerControlsString(i, playerManager.GetComponent<PlayerManager>().players[i].leftKey, playerManager.GetComponent<PlayerManager>().players[i].rightKey);
-                }
+            playerManager.GetComponent<PlayerManager>().textList[i].text = "P" + (i + 1) + ": " + playerManager.GetComponent<PlayerManager>().players[i].leftKey.ToString() + " || " + playerManager.GetComponent<PlayerManager>().players[i].rightKey.ToString();
+        }
         print("Shuffle!");
     }
 
@@ -52,7 +52,7 @@ public class PowerUpManager : MonoBehaviour
             temp = playerManager.GetComponent<PlayerManager>().players[i].leftKey;
             playerManager.GetComponent<PlayerManager>().players[i].leftKey = playerManager.GetComponent<PlayerManager>().players[i].rightKey;
             playerManager.GetComponent<PlayerManager>().players[i].rightKey = temp;
-            playerManager.GetComponent<PlayerManager>().textList[i].text = playerManager.GetComponent<PlayerManager>().PlayerControlsString(i, playerManager.GetComponent<PlayerManager>().players[i].leftKey, playerManager.GetComponent<PlayerManager>().players[i].rightKey);
+            playerManager.GetComponent<PlayerManager>().textList[i].text = "P" + (i + 1) + ": " + playerManager.GetComponent<PlayerManager>().players[i].leftKey.ToString() + " || " + playerManager.GetComponent<PlayerManager>().players[i].rightKey.ToString();
         }
         print("Switch!");
     }
@@ -119,7 +119,7 @@ public class PowerUpManager : MonoBehaviour
 
             prevLeft = tempLeft;
             prevRight = tempRight;
-            playerManager.GetComponent<PlayerManager>().textList[i].text = playerManager.GetComponent<PlayerManager>().PlayerControlsString(i, playerManager.GetComponent<PlayerManager>().players[i].leftKey, playerManager.GetComponent<PlayerManager>().players[i].rightKey);
+            playerManager.GetComponent<PlayerManager>().textList[i].text = "P" + (i + 1) + ": " + playerManager.GetComponent<PlayerManager>().players[i].leftKey.ToString() + " || " + playerManager.GetComponent<PlayerManager>().players[i].rightKey.ToString();
         }
         int temp;
         if (activatingPlayer != 0)
@@ -133,7 +133,7 @@ public class PowerUpManager : MonoBehaviour
 
         playerManager.GetComponent<PlayerManager>().players[temp].leftKey = lastLeft;
         playerManager.GetComponent<PlayerManager>().players[temp].rightKey = lastRight;
-        playerManager.GetComponent<PlayerManager>().textList[temp].text = playerManager.GetComponent<PlayerManager>().PlayerControlsString(temp, playerManager.GetComponent<PlayerManager>().players[temp].leftKey, playerManager.GetComponent<PlayerManager>().players[temp].rightKey);
+        playerManager.GetComponent<PlayerManager>().textList[temp].text = "P" + (temp + 1) + ": " + playerManager.GetComponent<PlayerManager>().players[temp].leftKey.ToString() + " || " + playerManager.GetComponent<PlayerManager>().players[temp].rightKey.ToString();
 
         print("Switch Controls with others!");
     }
